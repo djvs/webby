@@ -13,7 +13,7 @@
 require 'Qt'
 require 'qtwebkit'
 
-DEFAULTURL = "http://www.startpage.a-revolt.org/index.php"
+DEFAULTURL = "http://www.protopage.com"
 
 class QtApp < Qt::Widget
     slots 'changeaddr(addr)'
