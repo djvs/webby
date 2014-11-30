@@ -5,7 +5,7 @@ world's simplest ruby browser
 
 requirements
   * ruby
-  * libqt-dev
+  * libqt
   * qtbindings gem
 
 run as:
