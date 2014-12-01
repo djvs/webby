@@ -10,7 +10,8 @@ requirements
   * yaml gem
 
 run:
-  ./webby
+
+    ./webby
 
 bookmarks, config and css stored in ~/.webby
 
