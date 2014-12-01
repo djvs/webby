@@ -9,6 +9,8 @@ requirements
   * qtbindings gem
   * yaml gem
 
-run as:
+run:
+  ./webby
 
-    ruby browser.rb
+bookmarks, config and css stored in ~/.webby
+
