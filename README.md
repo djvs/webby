@@ -7,6 +7,7 @@ requirements
   * ruby
   * libqt
   * qtbindings gem
+  * yaml gem
 
 run as:
 
