@@ -19,6 +19,23 @@ Bookmarks = YAML.load_file(bookmarkf)
 puts Bookmarks.inspect
 Css = File.read(css)
 
+class BookmarkW < Qt::Widget
+  def initialize
+    super
+    
+    setWindowTitle "new bookmark"
+    
+    init_ui
+    
+    resize 200,160
+
+    show
+  end
+  def init_ui
+    vbox = Qt::VBoxLayout.new self
+
+  end
+end
 
 class QtApp < Qt::Widget
   slots 'changeaddr(addr)', :bookmark
@@ -42,7 +59,15 @@ class QtApp < Qt::Widget
   end
 
   def bookmark
-    puts @addressbar.text
+    @bookmarkw = BookmarkW.new 
+  end
+
+  def savebookmark
+    k = @webview.title.to_s
+    v = @addressbar.text
+    Bookmarks[k] = v
+    addbookmarkb(k,v)
+    puts Bookmarks.to_yaml
   end
   
   def changeaddr(url)
@@ -50,6 +75,14 @@ class QtApp < Qt::Widget
     @webview.load(Qt::Url.new(url))
   end
   
+  def addbookmarkb(k,v)
+      puts "adding bookmark #{k} #{v}"
+      bbutton = Qt::PushButton.new(k)
+      connect(bbutton,SIGNAL('released()')){|x| changeaddr(v)}
+      bbutton.setStyleSheet('background-color:white;color:black;margin:0px;padding:3px;')
+      @bookmarkbar.addWidget bbutton
+  end
+
   def init_ui
     # layout
     vbox = Qt::VBoxLayout.new self
@@ -57,9 +90,7 @@ class QtApp < Qt::Widget
 
     @bookmarkbar = Qt::ToolBar.new
     Bookmarks.each do |k,v|
-      bbutton = Qt::PushButton.new(k)
-      connect(bbutton,SIGNAL('released()')){|x| changeaddr(v)}
-      @bookmarkbar.addWidget bbutton
+     addbookmarkb(k,v)
     end
     @addressbar = Qt::LineEdit.new DEFAULTURL, self
     @addressbar.setStyleSheet('background-color:white;color:black;')
